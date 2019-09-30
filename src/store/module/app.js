@@ -23,6 +23,9 @@ export default {
         case "Product":
           state.current.viewName = "产品管理";
           break;
+        case "Order":
+          state.current.viewName = "订单管理";
+          break;
         default:
           break;
       }

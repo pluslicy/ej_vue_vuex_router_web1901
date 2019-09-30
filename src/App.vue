@@ -60,7 +60,7 @@
 
 <script>
 
-import {mapState,mapMutations} from 'vuex'
+import {mapState,mapMutations,mapActions} from 'vuex'
 export default {
   name: 'app',
   data(){
@@ -69,11 +69,16 @@ export default {
       currentViewName:"顾客管理"
     }
   },
+  created(){
+    // 查询所有入驻员工信息
+    this.findAllWaiters();
+  },
   computed:{
     ...mapState("app",["current"])
   },
   methods:{
     ...mapMutations("app",["resetCurrentView"]),
+    ...mapActions("waiter",["findAllWaiters"]),
     selectHandler(index){
       switch(index){
         case "/":
@@ -86,6 +91,9 @@ export default {
           break;
         case "/product":
           this.resetCurrentView("Product")       
+          break;
+        case "/order":
+          this.resetCurrentView("Order")       
           break;
         case "5":
           break;

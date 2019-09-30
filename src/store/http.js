@@ -4,7 +4,8 @@ import qs from 'qs'
 // 全局配置
 // axios.defaults.headers.common["token"] = ""
 // axios.defaults.headers.post["Content-Type"] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.baseURL = 'http://134.175.100.63:6677';
+// axios.defaults.baseURL = 'http://134.175.100.63:6677';
+axios.defaults.baseURL = 'http://127.0.0.1:6677';
 
 // 配置请求拦截
 /*

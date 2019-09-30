@@ -5,6 +5,7 @@ import Customer from './views/Customer'
 import Category from './views/Category'
 import Product from './views/Product'
 import ProductDetails from './views/ProductDetails'
+import Order from './views/Order'
 
 
 Vue.use(Router)
@@ -17,6 +18,8 @@ export default new Router({
     { path: '/customer', name: 'customer', component: Customer },
     { path: '/category', name: 'category', component: Category },
     { path: '/product', name: 'product', component: Product },
-    { path: '/productDetails/:id', name: 'productDetails', component: ProductDetails }
+    { path: '/productDetails/:id', name: 'productDetails', component: ProductDetails },
+    { path: '/order', name: 'order', component: Order },
+
   ]
 })

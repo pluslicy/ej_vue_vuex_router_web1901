@@ -35,7 +35,7 @@ export default {
     },
     // 分页查询
     query({commit},params){
-      post("/product/query",params)
+      post("/product/queryProductCascadeCategory",params)
       .then((result)=>{
         commit("resetList",result.data);
       })

@@ -24,12 +24,12 @@
       <el-table-column label="名称" prop="name"></el-table-column>
       <el-table-column label="单价" prop="price"></el-table-column>
       <el-table-column label="状态" prop="status"></el-table-column>
-      <el-table-column label="所属分类" prop="categoryId"></el-table-column>
-      <el-table-column label="图片">
+      <el-table-column label="所属分类" prop="category.name"></el-table-column>
+      <!-- <el-table-column label="图片">
         <template v-slot="slot">
           <img width="100%" :src="slot.row.photo" alt="图片找不到">
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="操作" width="150px" align="center">
         <template v-slot="slot">
           <a href="">删除</a> &nbsp;

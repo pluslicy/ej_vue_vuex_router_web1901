@@ -4,6 +4,8 @@ import customer from './module/customer'
 import category from './module/category'
 import product from './module/product'
 import app from './module/app'
+import order from './module/order'
+import waiter from './module/waiter'
 
 Vue.use(Vuex)
 
@@ -12,6 +14,8 @@ export default new Vuex.Store({
     customer,
     product,
     category,
-    app
+    app,
+    order,
+    waiter
   }
 })
