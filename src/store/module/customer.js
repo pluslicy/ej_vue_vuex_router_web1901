@@ -45,18 +45,16 @@ export default {
         context.dispatch("closeModal");
       })
     } ,
-    batchDelete({dispatch,commit},ids){
+    batchDelete({commit},ids){
       return post_array("/customer/batchDelete",{ids})
       .then((result)=>{
         commit("resetMsg",result.statusText)
-        dispatch("findAll")
       })
     },
-    deleteById({dispatch,commit},id){
+    deleteById({commit},id){
       get("/customer/deleteById?id="+id)
       .then((result)=>{
         commit("resetMsg",result.statusText);
-        dispatch("findAll");
       })
     },
     findAll(context){
@@ -69,6 +67,13 @@ export default {
       .finally(()=>{
         context.commit("resetLoaing",false)
       });
-    }
+    },
+    // 分页查询
+    query({commit},params){
+      post("/customer/query",params)
+      .then((result)=>{
+        commit("resetList",result.data);
+      })
+    },
   }
 }

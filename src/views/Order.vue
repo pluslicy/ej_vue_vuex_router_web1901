@@ -8,6 +8,11 @@
           <el-table-column label="总价" prop="total"/>
           <el-table-column label="状态" prop="status"/>
           <el-table-column label="顾客id" prop="customerId"/>
+          <el-table-column label="操作" width="80px">
+            <template v-slot="slot">
+              <a href="" @click.prevent="toOrderDetailsHandler">详情</a>
+            </template>
+          </el-table-column>
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="待支付" name="待支付">
@@ -42,7 +47,7 @@
           <el-table-column label="顾客id" prop="customerId"/>
           <el-table-column label="操作" width="80px">
             <template v-slot="slot">
-              <a href="">取消</a>
+              <a href="" @click.prevent="cancelHandler(slot.row.id)">取消</a>
             </template>
           </el-table-column>
         </el-table>
@@ -82,9 +87,8 @@
       :visible.sync="visible"
       width="40%"
       :before-close="handleClose">
-      
      <div class="dialog-content">
-        <el-radio-group v-model="waiterId">
+        <el-radio-group v-model="params.waiterId">
           <div v-for="w in waiters" :key="w.id" >
             <el-radio style="line-height:3em" :label="w.id" >{{w.realname}}</el-radio>
           </div>
@@ -93,7 +97,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="visible = false" size="small">取 消</el-button>
-        <el-button type="primary" size="small" @click="visible = false">确 定</el-button>
+        <el-button type="primary" size="small" @click="sendOrderHandler">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -107,27 +111,51 @@ export default {
       title:"派单",
       visible:false,
       activeName:"all",
-      waiterId:0,
+      params:{
+        waiterId:0,
+        orderId:0
+      }
     }
   },
   created(){
     this.findAllOrders();
   },
   computed:{
-    ...mapState("order",["orders"]),
+    ...mapState("order",["orders","message"]),
     ...mapState("waiter",["waiters"]),
     ...mapGetters("order",["filterOrdersByStatus"])
   },
   methods:{
-    ...mapActions("order",["findAllOrders"]),
+    ...mapActions("order",["findAllOrders","sendOrder","cancelSendOrder"]),
     handleClick(tab){
       this.activeName = tab.name;
     },
     handleClose(){
       this.visible = false;
     },
+    // 打开模态框设置派单对象
     paidanHandler(orderId){
+      this.params.orderId = orderId;
       this.visible = true;
+    },
+    // 派单
+    sendOrderHandler(){
+      if(this.params.orderId!== 0 && this.params.waiterId !== 0){
+        this.sendOrder(this.params).then(()=>{
+          this.visible = false;
+          this.$notify({ title: '成功', message: this.message, type: 'success' });
+        })
+      }
+    },
+    // 取消派单处理函数
+    cancelHandler(orderId){
+      this.cancelSendOrder(orderId).then(()=>{
+        this.$notify({ title: '成功', message: this.message, type: 'success' });
+      })
+    },
+    //查看详情
+    toOrderDetailsHandler(){
+
     }
   }
 }

@@ -1,11 +1,10 @@
 <template>
   <div id="product">
-    <!-- {{productList}} -->
     <el-row>
       <!-- 搜索栏 -->
       <el-col :span="12">
         <el-form :inline="true">
-          <el-form-item label="姓名">
+          <el-form-item label="名称">
             <el-input size="small" v-model="params.name"></el-input>
           </el-form-item>
           <el-form-item>
@@ -14,7 +13,7 @@
         </el-form>
       </el-col>
       <!-- 按钮 -->
-      <el-col :span="12" style="text-align:right">
+      <el-col :span="12" style="text-align:right;line-height:40px;height:40px;">
         <el-button size="small" type="primary" @click="toAddHandler">添加</el-button>
       </el-col>
     </el-row>
@@ -48,7 +47,6 @@
     </el-pagination>
     <!-- 模态框 -->
      <el-dialog :title="title" :visible="visible" @close="closeModal">
-       {{product}}
       <el-form :model="product" ref="productForm" :rules="rules" label-width="80px" labelPosition="left">
         <el-form-item label="名称" prop="name">
           <el-input v-model="product.name"/>
